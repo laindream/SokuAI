@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 	gameManager.rightAi = ai;
 	try {
 		while (true)
-			gameManager.runOnce(params, -1, inputDelay,false,true);
+			gameManager.runOnce(params, -1, inputDelay);
 	} catch (std::exception &e) {
 		puts(e.what());
 	}

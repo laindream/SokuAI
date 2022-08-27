@@ -7,6 +7,7 @@
 
 namespace Trainer
 {
+	extern int GameInstanceDefaultTimeout = 0;
 	template<typename T>
 	class GuardedPtr {
 	private:
@@ -51,6 +52,7 @@ namespace Trainer
 
 	inline Packet *_recvPacket(SOCKET sock, int timeout = 30)
 	{
+		if (GameInstanceDefaultTimeout != 0)timeout = GameInstanceDefaultTimeout;
 		Opcode op;
 		int received = _recv(sock, reinterpret_cast<char *>(&op), sizeof(op), 0, timeout);
 		size_t expected;
