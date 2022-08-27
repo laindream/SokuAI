@@ -25,6 +25,23 @@ add_library(
 target_compile_definitions("SokuAIOfflinePlayer" PRIVATE DIRECTINPUT_VERSION=0x0800 CURL_STATICLIB _CRT_SECURE_NO_WARNINGS $<$<CONFIG:Debug>:_DEBUG>)
 target_link_libraries(SokuAIOfflinePlayer SokuLib shlwapi ws2_32)
 
+add_library(
+	SokuAIServerPlayer
+	MODULE
+	Training/ServerVersusMod/Packet.hpp
+	Training/ServerVersusMod/main.cpp
+)
+target_compile_definitions("SokuAIServerPlayer" PRIVATE DIRECTINPUT_VERSION=0x0800 CURL_STATICLIB _CRT_SECURE_NO_WARNINGS $<$<CONFIG:Debug>:_DEBUG>)
+target_link_libraries(SokuAIServerPlayer SokuLib shlwapi ws2_32)
+
+add_library(
+	SokuAIClientPlayer
+	MODULE
+	Training/ClientVersusMod/Packet.hpp
+	Training/ClientVersusMod/main.cpp
+)
+target_compile_definitions("SokuAIClientPlayer" PRIVATE DIRECTINPUT_VERSION=0x0800 CURL_STATICLIB _CRT_SECURE_NO_WARNINGS $<$<CONFIG:Debug>:_DEBUG>)
+target_link_libraries(SokuAIClientPlayer SokuLib shlwapi ws2_32)
 
 add_library(
 	NeuronAILib
