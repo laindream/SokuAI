@@ -97,6 +97,8 @@ namespace Trainer
 	private:
 		unsigned _firstTo;
 		unsigned _inputDelay;
+		unsigned _tps;
+		bool _hasDisplay;
 		unsigned _timeout;
 		std::vector<std::unique_ptr<GameManager>> _gameManagers;
 
@@ -109,6 +111,8 @@ namespace Trainer
 			unsigned short portStart,
 			const std::string &gamePath,
 			unsigned inputDelay = 0,
+			unsigned int tps = 60000,
+			bool hasDisplay = false,
 			unsigned timeLimit = -1,
 			unsigned firstTo = 2,
 			const char *iniPath = nullptr

@@ -158,7 +158,7 @@ std::mt19937 random;
 int main(int argc, char *argv[])
 {
 	if (argc < 8) {
-		printf("Usage: %s <game_path> <port_start> <nb_game_instances> <population_size> <input_delay> <middle_layer_size> <gene_count> <first_to> [<SWRSToys.ini>]\n", argv[0]);
+		printf("Usage: %s <game_path> <port_start> <nb_game_instances> <population_size> <input_delay> <tps> <has_display> <middle_layer_size> <gene_count> <first_to> [<SWRSToys.ini>]\n", argv[0]);
 		return EXIT_FAILURE;
 	}
 
@@ -166,15 +166,28 @@ int main(int argc, char *argv[])
 	random.seed(time(nullptr));
 
 	std::string client = argv[1];
+	printf("Client: %s\n", client.c_str());
 	unsigned short port = std::stoul(argv[2]);
+	printf("Port: %i\n", port);
 	unsigned nb = std::stoul(argv[3]);
+	printf("Nb game instances: %i\n", nb);
 	unsigned popSize = std::stoul(argv[4]);
+	printf("Population size: %i\n", popSize);
 	unsigned inputDelay = std::stoul(argv[5]);
-	NEURON_COUNT = std::stoul(argv[6]);
-	GENES_COUNT = std::stoul(argv[7]);
-	unsigned ft = std::stoul(argv[8]);
-	const char *ini = argc == 10 ? argv[9] : nullptr;
-	SwissTournamentManager tournament(nb, port, client, inputDelay, 5 * 60 * 60, ft, ini);
+	printf("Input delay: %i\n", inputDelay);
+	unsigned tps = std::stoul(argv[6]);
+	printf("TPS: %i\n", tps);
+	bool hasDisplay = std::stoul(argv[7]);
+	printf("Has display: %i\n", hasDisplay);
+	NEURON_COUNT = std::stoul(argv[8]);
+	printf("Neuron count: %i\n", NEURON_COUNT);
+	GENES_COUNT = std::stoul(argv[9]);
+	printf("Gene count: %i\n", GENES_COUNT);
+	unsigned ft = std::stoul(argv[10]);
+	printf("First to: %i\n", ft);
+	const char *ini = argc == 12 ? argv[11] : nullptr;
+	printf("Ini: %s\n", ini ? ini : "null");
+	SwissTournamentManager tournament(nb, port, client, inputDelay,tps, hasDisplay, 5 * 60 * 60, ft, ini);
 	auto latest = getLatestGen(SokuLib::TRAINING_CHARACTER, SokuLib::TRAINING_CHARACTER);
 	std::vector<std::unique_ptr<GeneticAI>> ais;
 

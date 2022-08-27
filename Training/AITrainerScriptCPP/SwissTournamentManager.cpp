@@ -257,12 +257,16 @@ namespace Trainer
 		unsigned short portStart,
 		const std::string &gamePath,
 		unsigned int inputDelay,
+		unsigned int tps,
+		bool hasDisplay,
 		unsigned int timeLimit,
 		unsigned int firstTo,
 		const char *iniPath
 	) :
 		_firstTo(firstTo),
 		_inputDelay(inputDelay),
+		_tps(tps),
+		_hasDisplay(hasDisplay),
 		_timeout(timeLimit)
 	{
 		std::vector<GameOpenThread> openThread;
@@ -271,7 +275,7 @@ namespace Trainer
 		openThread.reserve(gamePool);
 		printf("Opening %u games\n", gamePool);
 		for (int i = 0; i < gamePool; i++) {
-			openThread.emplace_back(mutex, this->_gameManagers, gamePath + "/" + std::to_string(i) + "/th123.exe", portStart + i, GAME_TPS, DISPLAY_PARAM, SOUND_PARAM, iniPath);
+			openThread.emplace_back(mutex, this->_gameManagers, gamePath + "/" + std::to_string(i) + "/th123.exe", portStart + i, tps, hasDisplay, SOUND_PARAM, iniPath);
 			openThread.back().start();
 		}
 		for (auto &thread : openThread)
