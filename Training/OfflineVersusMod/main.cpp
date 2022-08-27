@@ -101,7 +101,7 @@ static void fillState(const SokuLib::CharacterManager &source, const SokuLib::Ch
 	destination.frameCount = source.objectBase.frameCount;
 	destination.comboDamage = source.combo.damages;
 	destination.comboLimit = source.combo.limit;
-	destination.airBorne = source.objectBase.frameData.frameFlags.airborne;
+	destination.airBorne = source.objectBase.frameData->frameFlags.airborne;
 	destination.hp = source.objectBase.hp;
 	destination.airDashCount = source.airdashCount;
 	destination.spirit = source.currentSpirit;
@@ -139,7 +139,7 @@ static void fillState(const SokuLib::ObjectManager &object, const SokuLib::Chara
 	destination.relativePosOpponent.x = object.position.x - opponent.objectBase.position.x;
 	destination.relativePosOpponent.y = object.position.y - opponent.objectBase.position.y;
 	destination.action = object.action;
-	destination.imageID = object.image.number;
+	destination.imageID = object.image->number;
 }
 
 void __fastcall KeymapManagerSetInputs(SokuLib::KeymapManager *This)
